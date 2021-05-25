@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_attribute")
-public class Attribute {
+@Table(name = "tb_product_images")
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,38 +15,32 @@ public class Attribute {
 
     @NotBlank
     @Column(nullable = false)
-    private String name;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String description;
+    private String bucketUrl;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @ManyToOne @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @Deprecated
-    public Attribute() {
+    public Image() {
     }
 
-    public Attribute(String name, String description, Product product) {
-        this.name = name;
-        this.description = description;
+    public Image(String bucketUrl, Product product) {
+        this.bucketUrl = bucketUrl;
         this.product = product;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Attribute)) return false;
-        Attribute attribute = (Attribute) o;
-        return Objects.equals(name, attribute.name);
+        if (!(o instanceof Image)) return false;
+        Image image = (Image) o;
+        return Objects.equals(bucketUrl, image.bucketUrl) && Objects.equals(product, image.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(bucketUrl, product);
     }
 
 }

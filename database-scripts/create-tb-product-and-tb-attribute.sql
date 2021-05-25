@@ -18,5 +18,5 @@ create table tb_attribute(
     description varchar(255) not null,
     product_id bigint not null,
 
-    constraint fk_attribute_product foreign key (product_id) references tb_product (id)
+    constraint fk_attribute_product foreign key (product_id) references tb_product (id) on delete cascade
 ) engine=InnoDB default charset=utf8mb4;

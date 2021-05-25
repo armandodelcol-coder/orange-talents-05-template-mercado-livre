@@ -54,6 +54,13 @@ public class Product {
     @ManyToOne @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Set<Image> images = new HashSet<>();
+
+    @Deprecated
+    public Product() {
+    }
+
     public Product(String name,
                    BigDecimal price,
                    Integer stock,
@@ -68,6 +75,16 @@ public class Product {
         this.category = category;
         this.attributes = attributesRequest.stream().map(attr -> attr.toModel(this)).collect(Collectors.toSet());
         this.owner = owner;
+    }
+
+    public void associateImages(Set<String> links) {
+        this.images = links.stream()
+                .map(s -> new Image(s, this))
+                .collect(Collectors.toSet());
+    }
+
+    public boolean belongsTo(User user) {
+        return owner.equals(user);
     }
 
 }
