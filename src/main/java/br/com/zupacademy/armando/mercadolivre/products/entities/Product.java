@@ -77,6 +77,14 @@ public class Product {
         this.owner = owner;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
     public void associateImages(Set<String> links) {
         this.images = links.stream()
                 .map(s -> new Image(s, this))
