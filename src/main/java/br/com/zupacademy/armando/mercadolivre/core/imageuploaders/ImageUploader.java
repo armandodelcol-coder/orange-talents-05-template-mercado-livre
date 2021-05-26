@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.mercadolivre.products.imageuploaders;
+package br.com.zupacademy.armando.mercadolivre.core.imageuploaders;
 
 import org.springframework.web.multipart.MultipartFile;
 
