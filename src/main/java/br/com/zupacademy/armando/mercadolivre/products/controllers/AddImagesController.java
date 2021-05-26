@@ -2,7 +2,7 @@ package br.com.zupacademy.armando.mercadolivre.products.controllers;
 
 import br.com.zupacademy.armando.mercadolivre.products.entities.Product;
 import br.com.zupacademy.armando.mercadolivre.products.requests.NewImagesRequest;
-import br.com.zupacademy.armando.mercadolivre.products.services.ImageUploader;
+import br.com.zupacademy.armando.mercadolivre.products.imageuploaders.ImageUploader;
 import br.com.zupacademy.armando.mercadolivre.users.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

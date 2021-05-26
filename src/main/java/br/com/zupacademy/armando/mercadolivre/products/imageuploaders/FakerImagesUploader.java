@@ -1,14 +1,14 @@
-package br.com.zupacademy.armando.mercadolivre.products.services;
+package br.com.zupacademy.armando.mercadolivre.products.imageuploaders;
 
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 @Primary
 public class FakerImagesUploader implements ImageUploader {
 
