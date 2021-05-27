@@ -1,6 +1,6 @@
 package br.com.zupacademy.armando.mercadolivre.products.controllers;
 
-import br.com.zupacademy.armando.mercadolivre.products.emaildispatchers.EmailDispatcherToProductOwner;
+import br.com.zupacademy.armando.mercadolivre.core.emaildispatchers.EmailDispatcherToProductOwner;
 import br.com.zupacademy.armando.mercadolivre.products.entities.Product;
 import br.com.zupacademy.armando.mercadolivre.products.entities.Question;
 import br.com.zupacademy.armando.mercadolivre.products.requests.NewQuestionRequest;

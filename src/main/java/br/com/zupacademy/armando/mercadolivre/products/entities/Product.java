@@ -147,4 +147,17 @@ public class Product {
         return BigDecimal.valueOf(totalOfRatings).divide(BigDecimal.valueOf(getTotalOpinions()));
     }
 
+    public boolean hasStockFor(Integer quantity) {
+        return this.stock >= quantity;
+    }
+
+    public boolean withDrawStock(Integer quantity) {
+        if (hasStockFor(quantity)) {
+            this.stock -= quantity;
+            return true;
+        }
+
+        return false;
+    }
+
 }
