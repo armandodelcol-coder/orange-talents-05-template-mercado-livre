@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_product_question")
@@ -31,6 +32,10 @@ public class Question {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @Deprecated
+    public Question() {
+    }
+
     public Question(String title, User user, Product product) {
         this.title = title;
         this.user = user;
@@ -51,6 +56,23 @@ public class Question {
 
     public String getProductOwnerName() {
         return this.product.getOwner().getUsername();
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return Objects.equals(title, question.title) && Objects.equals(createdAt, question.createdAt) && Objects.equals(user, question.user) && Objects.equals(product, question.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, createdAt, user, product);
     }
 
 }

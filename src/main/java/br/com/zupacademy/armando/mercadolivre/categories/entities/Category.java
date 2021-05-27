@@ -27,6 +27,10 @@ public class Category {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setParentCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
     }

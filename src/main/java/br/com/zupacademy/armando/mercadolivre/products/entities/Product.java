@@ -57,6 +57,12 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Image> images = new HashSet<>();
 
+    @OneToMany(mappedBy = "product")
+    private Set<Opinion> opinions = new HashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    private Set<Question> questions = new HashSet<>();
+
     @Deprecated
     public Product() {
     }
@@ -85,6 +91,42 @@ public class Product {
         return owner;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Set<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public Set<Opinion> getOpinions() {
+        return opinions;
+    }
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
     public void associateImages(Set<String> links) {
         this.images = links.stream()
                 .map(s -> new Image(s, this))
@@ -93,6 +135,16 @@ public class Product {
 
     public boolean belongsTo(User user) {
         return owner.equals(user);
+    }
+
+    public Integer getTotalOpinions() {
+        return this.opinions.size();
+    }
+
+    public BigDecimal getAverageOpinions() {
+        List<Integer> ratings = this.opinions.stream().map(opinion -> opinion.getRating()).collect(Collectors.toList());
+        Integer totalOfRatings = ratings.stream().reduce(0, (subtotal, element) -> subtotal + element);
+        return BigDecimal.valueOf(totalOfRatings).divide(BigDecimal.valueOf(getTotalOpinions()));
     }
 
 }
