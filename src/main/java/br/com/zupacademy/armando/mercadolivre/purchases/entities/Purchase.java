@@ -2,6 +2,7 @@ package br.com.zupacademy.armando.mercadolivre.purchases.entities;
 
 import br.com.zupacademy.armando.mercadolivre.products.entities.Product;
 import br.com.zupacademy.armando.mercadolivre.purchases.enums.Gateway;
+import br.com.zupacademy.armando.mercadolivre.purchases.enums.PurchaseStatus;
 import br.com.zupacademy.armando.mercadolivre.users.entities.User;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -49,6 +50,10 @@ public class Purchase {
 
     @Column(nullable = false)
     private String code;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PurchaseStatus status = PurchaseStatus.INICIADA;
 
     public Purchase(Integer quantity, Gateway gateway, Product product, User purchaser) {
         this.quantity = quantity;
