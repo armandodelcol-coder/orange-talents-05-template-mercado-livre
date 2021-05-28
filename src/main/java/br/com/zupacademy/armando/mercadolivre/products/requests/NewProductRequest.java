@@ -1,7 +1,7 @@
 package br.com.zupacademy.armando.mercadolivre.products.requests;
 
 import br.com.zupacademy.armando.mercadolivre.categories.entities.Category;
-import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsId;
+import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsBy;
 import br.com.zupacademy.armando.mercadolivre.products.entities.Product;
 import br.com.zupacademy.armando.mercadolivre.users.entities.User;
 import org.hibernate.validator.constraints.Length;
@@ -26,7 +26,7 @@ public class NewProductRequest {
     private Integer stock;
     @NotBlank @Length(max = 1000)
     private String description;
-    @NotNull @ExistsId(entityClass = Category.class)
+    @NotNull @ExistsBy(entityClass = Category.class, fieldName = "id")
     private Long categoryId;
     @NotNull @Size(min = 3) @Valid
     private List<AttributeRequest> attributes = new ArrayList<>();

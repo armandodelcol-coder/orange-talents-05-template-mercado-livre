@@ -55,6 +55,16 @@ public class Purchase {
     @Column(nullable = false)
     private PurchaseStatus status = PurchaseStatus.INICIADA;
 
+    @Column(columnDefinition = "datetime")
+    private LocalDateTime finalizedAt;
+
+    @Column(columnDefinition = "datetime")
+    private LocalDateTime failedAt;
+
+    @Deprecated
+    public Purchase() {
+    }
+
     public Purchase(Integer quantity, Gateway gateway, Product product, User purchaser) {
         this.quantity = quantity;
         this.gateway = gateway;
@@ -86,6 +96,32 @@ public class Purchase {
 
     public String getGatewayUrl() {
         return this.gateway.getUrl(this.code);
+    }
+
+    public void statusIsFinalized() {
+        this.finalizedAt = LocalDateTime.now();
+        this.status = PurchaseStatus.FINALIZADA;
+    }
+
+    public void statusIsFail() {
+        this.failedAt = LocalDateTime.now();
+        this.status = PurchaseStatus.FALHOU;
+    }
+
+    public Gateway getGateway() {
+        return gateway;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Long getPurchaserId() {
+        return this.purchaser.getId();
+    }
+
+    public Long getProductOwnerId() {
+        return this.product.getOwner().getId();
     }
 
 }

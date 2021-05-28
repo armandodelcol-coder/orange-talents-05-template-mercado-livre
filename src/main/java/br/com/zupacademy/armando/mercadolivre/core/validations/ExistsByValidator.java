@@ -1,7 +1,5 @@
 package br.com.zupacademy.armando.mercadolivre.core.validations;
 
-import org.springframework.util.Assert;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -9,25 +7,28 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsIdValidator implements ConstraintValidator<ExistsId, Long> {
+public class ExistsByValidator implements ConstraintValidator<ExistsBy, Object> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    private String fieldName;
+
     private Class<?> entityClass;
 
     @Override
-    public void initialize(ExistsId constraintAnnotation) {
+    public void initialize(ExistsBy constraintAnnotation) {
+        this.fieldName = constraintAnnotation.fieldName();
         this.entityClass = constraintAnnotation.entityClass();
     }
 
     @Override
-    public boolean isValid(Long value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (value == null) return true;
 
-        String jpql = "select entity from " + entityClass.getName() + " entity where id = :id";
+        String jpql = "select entity from " + entityClass.getName() + " entity where " + fieldName + " = :value";
         Query query = entityManager.createQuery(jpql);
-        query.setParameter("id", value);
+        query.setParameter("value", value);
         List<?> entities = query.getResultList();
         return !entities.isEmpty();
     }

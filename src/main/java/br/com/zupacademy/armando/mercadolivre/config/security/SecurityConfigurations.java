@@ -35,6 +35,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/transacao/paypal").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/transacao/pagseguro").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/notifica-ranking-sellers").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/notifica-fiscal").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);

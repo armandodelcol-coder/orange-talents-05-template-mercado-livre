@@ -1,4 +1,4 @@
-package br.com.zupacademy.armando.mercadolivre.core.validations;
+package br.com.zupacademy.armando.mercadolivre.transactions.validations;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,14 +10,12 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = { ExistsIdValidator.class })
+@Constraint(validatedBy = { DuplicateSuccessTransactionValidator.class })
 @Target({ FIELD })
 @Retention(RUNTIME)
-public @interface ExistsId {
+public @interface DuplicateSuccessTransaction {
 
-    Class<?> entityClass();
-
-    String message() default "{javax.validation.constraints.ExistsId.message}";
+    String message() default "Essa transação já foi efetuada com sucesso para outra compra.";
 
     Class<?>[] groups() default { };
 

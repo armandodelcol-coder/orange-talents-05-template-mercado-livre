@@ -1,6 +1,6 @@
 package br.com.zupacademy.armando.mercadolivre.purchases.requests;
 
-import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsId;
+import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsBy;
 import br.com.zupacademy.armando.mercadolivre.core.validations.ValueOfEnum;
 import br.com.zupacademy.armando.mercadolivre.products.entities.Product;
 import br.com.zupacademy.armando.mercadolivre.purchases.entities.Purchase;
@@ -16,7 +16,7 @@ public class NewPurchaseRequest {
     private Integer quantity;
     @NotNull @ValueOfEnum(enumClass = Gateway.class)
     private String gateway;
-    @NotNull @ExistsId(entityClass = Product.class)
+    @NotNull @ExistsBy(entityClass = Product.class, fieldName = "id")
     private Long productId;
 
     public NewPurchaseRequest(Integer quantity, String gateway, Long productId) {

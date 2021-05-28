@@ -1,7 +1,7 @@
 package br.com.zupacademy.armando.mercadolivre.categories.requests;
 
 import br.com.zupacademy.armando.mercadolivre.categories.entities.Category;
-import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsId;
+import br.com.zupacademy.armando.mercadolivre.core.validations.ExistsBy;
 import br.com.zupacademy.armando.mercadolivre.core.validations.UniqueValue;
 
 import javax.persistence.EntityManager;
@@ -11,7 +11,7 @@ public class NewCategoryRequest {
 
     @NotBlank @UniqueValue(entityClass = Category.class, fieldName = "name")
     private String name;
-    @ExistsId(entityClass = Category.class)
+    @ExistsBy(entityClass = Category.class, fieldName = "id")
     private Long parentCategoryId;
 
     public NewCategoryRequest(String name, Long parentCategoryId) {

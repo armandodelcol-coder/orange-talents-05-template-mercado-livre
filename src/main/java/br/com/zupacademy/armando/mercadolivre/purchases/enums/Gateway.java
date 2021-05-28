@@ -5,13 +5,13 @@ public enum Gateway {
     PayPal {
         @Override
         public String getUrl(String purchaseCode) {
-            return "paypal.com?buyerId=" + purchaseCode + "&redirectUrl=https://zupacademy/ot5/ml/purchases/success";
+            return "paypal.com?buyerId=" + purchaseCode + "&redirectUrl=http://localhost:8080/api/transacao/paypal";
         }
     },
     PagSeguro {
         @Override
         public String getUrl(String purchaseCode) {
-            return " pagseguro.com?returnId=" + purchaseCode + "&redirectUrl=https://zupacademy/ot5/ml/purchases/success";
+            return " pagseguro.com?returnId=" + purchaseCode + "&redirectUrl=http://localhost:8080/api/transacao/pagseguro";
         }
     };
 
